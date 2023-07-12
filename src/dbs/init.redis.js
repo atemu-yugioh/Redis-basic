@@ -1,30 +1,26 @@
 // const { createClient } = require('redis')
 
-// const connectRedis = async () => {
-//   try {
-//     const redisClient = createClient({
-//       url: 'redis://:apa7Nx6wBkizlS3uRgfeeN91goWyPYGp@redis-11713.c252.ap-southeast-1-1.ec2.cloud.redislabs.com:11713'
-//     })
+// const redisClient = createClient({
+//   url: 'redis://localhost:6379',
+//   legacyMode: true
+// })
 
-//     return await redisClient.connect()
+// redisClient.connect()
 
-//     // redisClient.ping((err, pong) => {
-//     //   console.log(pong)
-//     // })
+// redisClient.ping((err, pong) => {
+//   console.log(pong)
+// })
 
-//     // redisClient.on('ready', () => {
-//     //   console.log('Redis connected')
-//     // })
+// redisClient.on('ready', () => {
+//   console.log('Ready connected')
+// })
 
-//     // redisClient.on('error', (err) => {
-//     //   console.log('Redis Error', err)
-//     // })
-//   } catch (error) {
-//     await redisClient.disconnect()
-//     console.log('error:::', error)
-//   }
-// }
+// redisClient.on('connect', () => {
+//   console.log('Redis connected')
+// })
 
-// const instanceRedis = await connectRedis()
+// redisClient.on('error', (err) => {
+//   console.log('Redis Error', err)
+// })
 
-// module.exports = connectRedis
+// module.exports = redisClient

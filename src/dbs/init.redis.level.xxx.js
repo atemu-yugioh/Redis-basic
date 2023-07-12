@@ -1,17 +1,21 @@
-const { createClient } = require('redis')
-
+const { createClient, RedisClientType } = require('redis')
 class RedisDB {
   constructor() {
-    this.connect()
-  }
-
-  connect() {
     this.redisClient = createClient({
       url: 'redis://localhost:6379'
     })
+    this.connect()
+    this.name = 'thieng'
+  }
+
+  connect() {
+    this.redisClient.on('ready', () => {
+      console.log('Ready connected')
+    })
+
     this.redisClient
       .connect()
-      .then(() => {
+      .then((connection) => {
         console.log('Redis connected')
       })
       .catch((err) => {
@@ -19,15 +23,18 @@ class RedisDB {
       })
   }
 
+  getClient() {
+    return this.redisClient
+  }
+
   static getInstance() {
     if (!RedisDB.instance) {
       RedisDB.instance = new RedisDB()
     }
-
     return RedisDB.instance
   }
 }
 
-const instanceRedis = RedisDB.getInstance()
+const instanceRedis = RedisDB.getInstance().getClient()
 
 module.exports = instanceRedis

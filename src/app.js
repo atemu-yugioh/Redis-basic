@@ -15,7 +15,10 @@ app.use(express.urlencoded({ extended: true }))
 // init db
 require('./dbs/init.mongodb')
 require('./dbs/init.redis.level.xxx')
+// require('./dbs/init.redis')
+
 // init routes
+app.use('/api/v1', require('./routes'))
 
 // handling error 404
 app.use((req, res, next) => {
