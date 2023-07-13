@@ -22,7 +22,7 @@ class RedisService {
   }
 
   static addDelayEventOrder = async (key, delay) => {
-    return await redisClient.setEx(key, delay, key)
+    return await redisClient.setEx(key, delay, 'order')
   }
 }
 
