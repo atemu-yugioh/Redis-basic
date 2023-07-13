@@ -12,3 +12,5 @@ When foo_bar_1 expires, you'll get the corresponding message:
 > 2. "**keyspace@0**:foo*bar*\*"
 > 3. "**keyspace@0**:foo_bar_1"
 > 4. "expired"
+
+link : https://stackoverflow.com/questions/55746989/listen-to-redis-expiration-events-of-specific-key-names
