@@ -1,19 +1,21 @@
-const { setKey, getKey } = require('../services/redis.service')
+const { OK } = require('../core/success.response')
+const RedisService = require('../services/redis.service')
 
-const setKeyCtr = async (req, res, next) => {
-  const { key, value } = req.body
-  return res.status(200).json({
-    data: await setKey({ key, value })
-  })
+class RedisController {
+  setKeyCtr = async (req, res, next) => {
+    const { key, value } = req.body
+    new OK({
+      message: 'OK',
+      data: await RedisService.setKey({ key, value })
+    }).send(res)
+  }
+
+  getKeyCtr = async (req, res, next) => {
+    new OK({
+      message: 'OK',
+      data: await RedisService.getKey('newKey')
+    }).send(res)
+  }
 }
 
-const getKeyCtr = async (req, res, next) => {
-  return res.status(200).json({
-    data: await getKey('newKey')
-  })
-}
-
-module.exports = {
-  setKeyCtr,
-  getKeyCtr
-}
+module.exports = new RedisController()

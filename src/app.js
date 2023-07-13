@@ -2,7 +2,7 @@ const compression = require('compression')
 const morgan = require('morgan')
 const { default: helmet } = require('helmet')
 const express = require('express')
-const connectRedis = require('./dbs/init.redis')
+
 const app = express()
 
 // init middleware
@@ -13,9 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 // init db
-require('./dbs/init.mongodb')
-require('./dbs/init.redis.level.xxx')
-// require('./dbs/init.redis')
+require('./dbs')
 
 // init routes
 app.use('/api/v1', require('./routes'))

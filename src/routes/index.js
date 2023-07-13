@@ -1,8 +1,13 @@
 const express = require('express')
-const { setKeyCtr, getKeyCtr } = require('../controllers/redis.controller')
+const { rateLimiterV1, rateLimiterV2 } = require('../middlewares/rateLimiter.middleware')
+
 const router = express.Router()
 
-router.post('/set-key', setKeyCtr)
-router.get('/get-key', getKeyCtr)
+router.use(rateLimiterV2(60, 20))
+
+router.get('/heath-check', (req, res, next) => {
+  return res.status(200).json('OK')
+})
+router.use('/redis', require('./redis'))
 
 module.exports = router

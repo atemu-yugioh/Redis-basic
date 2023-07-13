@@ -1,14 +1,25 @@
-const instanceRedis = require('../dbs/init.redis.level.xxx')
+const { redisClient } = require('../dbs/init.redis.newVersion')
 
-const setKey = async ({ key, value }) => {
-  return await instanceRedis.set(key, value)
+class RedisService {
+  static setKey = async ({ key, value }) => {
+    return await redisClient.set(key, value)
+  }
+
+  static getKey = async (key) => {
+    return await redisClient.get(key)
+  }
+
+  static setRateLimitTransaction = async (ip, secondsLimit) => {
+    return await redisClient.multi().incr(ip).expire(ip, secondsLimit).exec()
+  }
+
+  static incr = async (key) => {
+    return await redisClient.incr(key)
+  }
+
+  static expire = async (key, time) => {
+    return await redisClient.expire(key, time)
+  }
 }
 
-const getKey = async (key) => {
-  return await instanceRedis.get(key)
-}
-
-module.exports = {
-  setKey,
-  getKey
-}
+module.exports = RedisService
