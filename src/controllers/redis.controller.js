@@ -16,6 +16,14 @@ class RedisController {
       data: await RedisService.getKey('newKey')
     }).send(res)
   }
+
+  addOrderTraveloka = async (req, res, next) => {
+    const { orderId } = req.body
+    new OK({
+      message: 'Order Success',
+      data: await RedisService.addDelayEventOrder(orderId, 10)
+    }).send(res)
+  }
 }
 
 module.exports = new RedisController()

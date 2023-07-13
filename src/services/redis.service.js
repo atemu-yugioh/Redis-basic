@@ -20,6 +20,10 @@ class RedisService {
   static expire = async (key, time) => {
     return await redisClient.expire(key, time)
   }
+
+  static addDelayEventOrder = async (key, delay) => {
+    return await redisClient.setEx(key, delay, key)
+  }
 }
 
 module.exports = RedisService
