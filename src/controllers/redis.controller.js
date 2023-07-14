@@ -1,5 +1,5 @@
 const { OK } = require('../core/success.response')
-const RedisService = require('../services/redis.service')
+const RedisService = require('../services/redis/redis.service')
 
 class RedisController {
   setKeyCtr = async (req, res, next) => {

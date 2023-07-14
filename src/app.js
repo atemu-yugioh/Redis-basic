@@ -18,6 +18,9 @@ require('./dbs')
 // init routes
 app.use('/api/v1', require('./routes'))
 
+// listen notify from redis
+require('./services/redis/redisSubscriberListenEvent')
+
 // handling error 404
 app.use((req, res, next) => {
   const error = new Error('Not found!')

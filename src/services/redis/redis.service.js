@@ -1,4 +1,5 @@
-const { redisClient } = require('../dbs/init.redis.newVersion')
+const { redisClient } = require('../../dbs/init.redis.newVersion')
+const redisPubSubService = require('./redisPubSub.service')
 
 class RedisService {
   static setKey = async ({ key, value }) => {
@@ -22,7 +23,9 @@ class RedisService {
   }
 
   static addDelayEventOrder = async (key, delay) => {
-    return await redisClient.setEx(key, delay, 'order')
+    // redisPubSubService.publish('preOrder', key)
+    const prefixRedisKey = 'delayOrder'
+    return await redisClient.setEx(key, delay, prefixRedisKey)
   }
 }
 

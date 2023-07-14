@@ -1,5 +1,5 @@
 const { TooManyRequestError } = require('../core/error.response')
-const RedisService = require('../services/redis.service')
+const RedisService = require('../services/redis/redis.service')
 
 // cứ vào là set lại thời gian
 const rateLimiterV1 = (secondsLimit, limitAmount) => {
