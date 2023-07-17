@@ -5,6 +5,12 @@ const app = express()
 
 app.use(express.json())
 
+app.get('/', (req, res, next) => {
+  return res.status(200).json({
+    message: 'OK'
+  })
+})
+
 app.post('/calculatorView', async (req, res, next) => {
   const { videoId, userId } = req.body
   const keyCalCulator = `${videoId}-${userId}`
