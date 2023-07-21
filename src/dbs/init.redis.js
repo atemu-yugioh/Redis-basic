@@ -1,26 +1,42 @@
-// const { createClient } = require('redis')
+const { createClient } = require('redis')
+const {
+  dbRedis: { url }
+} = require('../configs/config.app')
 
-// const redisClient = createClient({
-//   url: 'redis://localhost:6379',
-//   legacyMode: true
-// })
+const redisClient = createClient({ url })
 
-// redisClient.connect()
+class RedisDB {
+  constructor() {
+    this.connect()
+  }
 
-// redisClient.ping((err, pong) => {
-//   console.log(pong)
-// })
+  connect() {
+    redisClient.on('ready', () => {
+      console.log('Ready connect')
+    })
 
-// redisClient.on('ready', () => {
-//   console.log('Ready connected')
-// })
+    redisClient
+      .connect()
+      .then(() => {
+        console.log('Redis connected')
+      })
+      .catch(() => {
+        console.log('Unable connect to redis')
+      })
+  }
 
-// redisClient.on('connect', () => {
-//   console.log('Redis connected')
-// })
+  static getInstance() {
+    if (!RedisDB.instance) {
+      RedisDB.instance = new RedisDB()
+    }
 
-// redisClient.on('error', (err) => {
-//   console.log('Redis Error', err)
-// })
+    return RedisDB.instance
+  }
+}
 
-// module.exports = redisClient
+const instanceRedis = RedisDB.getInstance()
+
+module.exports = {
+  redisClient,
+  instanceRedis
+}
