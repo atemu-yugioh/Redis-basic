@@ -17,8 +17,8 @@ class RedisService {
     return await redisClient.incrBy(key, increment)
   }
 
-  static setExpired = async (key, time) => {
-    return await redisClient.setEx(key, time)
+  static expire = async (key, time) => {
+    return await redisClient.expire(key, time)
   }
 
   static setNx = async ({ key, value }) => {
@@ -30,6 +30,11 @@ class RedisService {
       EX: time,
       NX: true
     })
+  }
+
+  static addDelayEventOrder = async (key, delay) => {
+    const prefixRedisKey = 'delayOrder'
+    return await redisClient.setEx(key, delay, prefixRedisKey)
   }
 }
 

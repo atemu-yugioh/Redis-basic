@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const { default: helmet } = require('helmet')
 const express = require('express')
 const connectRedis = require('./dbs/init.redis')
+const redisSubscriberListenEventService = require('./services/redis/redisSubscriberListenEvent.service')
 const app = express()
 
 // init middleware
@@ -17,6 +18,9 @@ require('./dbs')
 
 // init routes
 app.use('/api/v1', require('./routes'))
+
+// listen event from redis
+require('./services/redis/redisSubscriberListenEvent.service')
 
 // handling error 404
 app.use((req, res, next) => {
