@@ -1,3 +1,4 @@
 module.exports = {
-  MongoDB: require('./init.mongodb')
+  MongoDB: require('./init.mongodb'),
+  RedisDB: require('./init.redis.new')
 }
