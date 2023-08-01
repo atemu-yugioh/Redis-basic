@@ -14,6 +14,9 @@ app.use(express.urlencoded({ extended: true }))
 // init db
 require('./dbs')
 
+// listen notification from event redis
+require('./services/redisSubscriberListenEvent')
+
 // init routes
 app.use('/api/v1', require('./routes'))
 

@@ -2,15 +2,17 @@ const { redisClient } = require('../dbs/init.redis.new')
 
 class RedisPubSubService {
   constructor() {
-    this.subscriber = redisClient.duplicate()
     this.publisher = redisClient.duplicate()
+    this.subscriber = redisClient.duplicate()
     this.connect()
   }
 
   connect() {
     this.publisher
       .connect()
-      .then(() => console.log(`Publisher connected`))
+      .then(() => {
+        console.log(`Publisher connected`)
+      })
       .catch((err) => {
         console.log(`Unable connect to publisher`)
       })
@@ -18,7 +20,7 @@ class RedisPubSubService {
     this.subscriber
       .connect()
       .then(() => {
-        console.log(`subscriber connected`)
+        console.log(`Subscriber connected`)
       })
       .catch((err) => {
         console.log(`Unable connect to subscriber`)
@@ -30,11 +32,11 @@ class RedisPubSubService {
   }
 
   subscribe = async (channel, callback) => {
-    return await this.subscriber.subscribe(channel, (channel, message) => callback(channel, message))
+    return await this.subscriber.subscribe(channel, (message, channel) => callback(message, channel))
   }
 
   pSubscribe = async (channel, callback) => {
-    return await this.subscriber.pSubscribe(channel, (channel, message) => callback(channel, message))
+    return await this.subscriber.pSubscribe(channel, (message, channel) => callback(message, channel))
   }
 }
 
