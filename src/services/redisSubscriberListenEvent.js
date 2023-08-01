@@ -1,4 +1,5 @@
 const redisPubSubService = require('./redis.pubsub.service')
+const TravelokaService = require('./traveloka.service')
 
 const keyPatterns = ['__keyevent@0__:expired', 'delayOrder']
 
@@ -6,9 +7,7 @@ const objectHandleEvent = {
   ['delayOrder']: (message) => {
     console.log(`Event: delayOrder`, message)
   },
-  ['__keyevent@0__:expired']: (message) => {
-    console.log(`Event: expire key`, message)
-  }
+  ['__keyevent@0__:expired']: TravelokaService.cancelOrder
 }
 
 class RedisSubscriberListenEvent {
