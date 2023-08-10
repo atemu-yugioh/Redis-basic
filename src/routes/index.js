@@ -15,4 +15,7 @@ router.use('/traveloka', require('./traveloka'))
 // HASH REDIS
 router.use('/hash', require('./hash'))
 
+// LIST REDIS
+router.use('/list', require('./list'))
+
 module.exports = router
