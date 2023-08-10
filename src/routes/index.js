@@ -12,4 +12,7 @@ router.get('/heath-check', (req, res, next) => {
 router.use('/redis', require('./redis'))
 router.use('/traveloka', require('./traveloka'))
 
+// HASH REDIS
+router.use('/hash', require('./hash'))
+
 module.exports = router
