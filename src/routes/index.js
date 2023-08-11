@@ -21,4 +21,7 @@ router.use('/list', require('./list'))
 // SETS REDIS
 router.use('/sets', require('./sets'))
 
+// ZSET REDIS
+router.use('/zSet', require('./zSet'))
+
 module.exports = router
