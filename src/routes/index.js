@@ -18,4 +18,7 @@ router.use('/hash', require('./hash'))
 // LIST REDIS
 router.use('/list', require('./list'))
 
+// SETS REDIS
+router.use('/sets', require('./sets'))
+
 module.exports = router
