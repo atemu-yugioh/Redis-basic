@@ -4,6 +4,7 @@ const router = express.Router()
 
 router.post('/add', zSetController.zAdd)
 router.get('/range', zSetController.zRange)
+router.get('/rangeWithScore', zSetController.zRangeWithScores)
 router.delete('/rem', zSetController.zRem)
 router.get('/card', zSetController.zCard)
 router.patch('/incrBy', zSetController.zIncrBy)

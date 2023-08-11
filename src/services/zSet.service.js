@@ -21,7 +21,10 @@ class ZSetService {
     return await redisClient.zAdd(key, members)
   }
 
-  // 2. zRevRange
+  // 2. zRangeWithScores
+  static zRangeWithScores = async ({ key, min, max }) => {
+    return await redisClient.zRangeWithScores(key, min, max)
+  }
 
   // 3. zRange
   static zRange = async ({ key, min, max }) => {

@@ -10,7 +10,14 @@ class ZSetController {
     })
   }
 
-  // 2. zRevRange
+  // 2. zRangeWithScores
+  zRangeWithScores = async (req, res, next) => {
+    const { key, min, max } = req.body
+    return res.status(200).json({
+      message: 'zRangeWithScores',
+      data: await ZSetService.zRangeWithScores({ key, min, max })
+    })
+  }
 
   // 3. zRange
   zRange = async (req, res, next) => {
